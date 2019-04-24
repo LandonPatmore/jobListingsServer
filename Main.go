@@ -5,13 +5,13 @@ import (
 	"net/http"
 )
 
-const IDPath = "804456910"
+const IDPath = "/804456910"
 
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", HomeHandler)
 
-	s := r.PathPrefix("/" + IDPath).Subrouter()
+	s := r.PathPrefix(IDPath).Subrouter()
 	s.HandleFunc("/all", GetAllDBRowsHandler).Methods("GET")
 	s.HandleFunc("/status", GetDBStatusHandler).Methods("GET")
 

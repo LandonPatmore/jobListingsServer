@@ -8,7 +8,7 @@ import (
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	_, _ = fmt.Fprint(w, "Home")
+	_, _ = fmt.Fprint(w, "Go to "+IDPath+"/all or "+IDPath+"/status")
 }
 
 func GetAllDBRowsHandler(w http.ResponseWriter, r *http.Request) {
