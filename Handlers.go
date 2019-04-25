@@ -30,15 +30,19 @@ func GetAllDBRowsHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		_, _ = fmt.Fprintf(w, err.Error())
+		return
 	}
 
 	respondWithJSON(w, http.StatusOK, jobs)
 }
 
 func GetDBStatusHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Creating dynamo client...")
 	err := CreateDynamoClient()
+	fmt.Println("Dynamo client created...")
 
 	if err != nil {
+		fmt.Println("Error creating dynamo client...")
 		_, _ = fmt.Fprintf(w, err.Error())
 		return
 	}
@@ -48,10 +52,14 @@ func GetDBStatusHandler(w http.ResponseWriter, r *http.Request) {
 		RecordCount int64
 	}
 
+	fmt.Println("Getting row count...")
 	count, err := aws.GetRowCount(dynamoClient, TableName)
+	fmt.Println("Row count retrieved...")
 
 	if err != nil {
+		fmt.Println("Error retrieving rows...")
 		_, _ = fmt.Fprintf(w, err.Error())
+		return
 	}
 
 	respondWithJSON(w, http.StatusOK, status{Table: TableName, RecordCount: count})
