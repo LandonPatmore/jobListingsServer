@@ -17,9 +17,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -o server .
 FROM alpine:latest
 
 # Add support for HTTPS and time zones
-RUN apk update && \
-    apk upgrade
-
+RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 
 WORKDIR /root/
 
