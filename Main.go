@@ -15,5 +15,5 @@ func main() {
 	s.HandleFunc("/all", GetAllDBRowsHandler).Methods("GET")
 	s.HandleFunc("/status", GetDBStatusHandler).Methods("GET")
 
-	http.ListenAndServe(":8080", r)
+	_ = http.ListenAndServe(":8080", r)
 }
